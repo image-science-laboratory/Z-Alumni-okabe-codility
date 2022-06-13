@@ -3,7 +3,7 @@
 
 # you can write to stdout for debugging purposes, e.g.
 # puts "this is a debug message"
-
+require "prime"
 
 def GCD(m, n)
 	return 0 if m == 0 || n == 0
@@ -27,3 +27,6 @@ b = 75
 puts LCM(a, b)
 puts GCD(a, b)
 puts LCM(a, b) / GCD(a, b)
+p Prime.prime_division(LCM(a, b))
+
+puts GCD(15, 15)
