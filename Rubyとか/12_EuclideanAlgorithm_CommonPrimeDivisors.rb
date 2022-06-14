@@ -29,10 +29,31 @@ def solution(a, b)
   a.length.times do |i|
     aa = a[i]; bb = b[i]
     lcm = LCM(aa, bb)
-    adiv = lcm / aa
-    bdiv = lcm / bb
-    abdiv = adiv * bdiv 
-    ans += 1 if aa % abdiv == 0 && bb % abdiv == 0 
+    gcd = GCD(aa, bb)
+
+    # gcdで割り続けると良い感じ
+    # [2,2,3] と [2,3,3]だと6で割って[2],[3]
+    # → [2], [3] と 6のgcdで割ると[1], [1]
+
+    # [2,2,3] と [2,3,3,5]だと 6でわって[2], [3,5]
+    # → [2], [3, 5] と 6のgcdで割ると[1], [5]
+    # → 6 と [5]のgcdで割っても5 
+
+    # 初期のGCDと更新した空間で割り続ければ初期のGCDに含まれないやーつが出るはず
+    prev = -1
+    while aa != prev 
+      prev = aa
+      aa = aa / GCD(aa, gcd)
+    end 
+
+    prev = -1
+    while bb != prev 
+      prev = bb 
+      bb = bb / GCD(bb, gcd)
+    end 
+
+    #puts "gcd:#{gcd} aa:#{aa} bb:#{bb}"
+    ans += 1 if aa * bb == 1
   end
   return ans
 end
