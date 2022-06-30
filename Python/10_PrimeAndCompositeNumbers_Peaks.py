@@ -21,7 +21,6 @@ def solution(A):
     peaks = []
     for i in range(1, n - 1):
         if A[i - 1] < A[i] > A[i + 1]: peaks.append(i)
-    
     pn = len(peaks)
 
     # factorsが各ブロックの要素数になり得る
@@ -31,8 +30,6 @@ def solution(A):
         blockInd = 0
         blockNum = n // blockSize
 
-
-
         j = 0
         while j < pn:
             pj = peaks[j]
@@ -40,7 +37,7 @@ def solution(A):
             right = (blockInd + 1) * blockSize 
 
             # 範囲外ならそのブロックにピークがないので成り立たない
-            if pj < left and right <= pj: break 
+            if pj < left or right <= pj: break 
 
             # 範囲内の間ピークを読み進める
             # 同一のブロックに何個ピークがあっても良いが，
